@@ -4,14 +4,14 @@ Develop a fully functional application by utilizing basic knowledge, tools and t
 # SCOPE:
 
 ## Planning and design:
-    - Learn how to leverage MVC pattern and designing program execution flow.
+> Learn how to leverage MVC pattern and designing program execution flow.
 ## Application Features:
-    - Explore Web working principles with a focus on HTTP, DNS resolution flow.
-    - Explore Websockets and understand how to allow browsers to have full-duplex communications       within servers.
-    - Get a deeper understanding of routing and how to map URLs to processing logic.
-    - Understand  vulnerabilities and what precautions to take in order to prevent attacks.
+>Explore Web working principles with a focus on HTTP, DNS resolution flow.
+> Explore Websockets and understand how to allow browsers to have full-duplex communications       within servers.
+> Get a deeper understanding of routing and how to map URLs to processing logic.
+>  Understand  vulnerabilities and what precautions to take in order to prevent attacks.
 ## Logic Functionality:
-    - Practice designing generic controllers, and how to handle requests and return responses after    inheriting from an object handler.
+> Practice designing generic controllers, and how to handle requests and return responses after    inheriting from an object handler.
 ## Auxiliary Functionality:
-    - Better understand common functionality such as log processing, information configuration etc.
+>Better understand common functionality such as log processing, information configuration etc.
 
