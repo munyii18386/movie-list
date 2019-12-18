@@ -2,7 +2,7 @@
 Develop a fully functional application by utilizing basic knowledge, tools and techniques acquired in prior INFO classes. Gain first-hand knowledge on  how to implement a complete project from scratch that will result in a better understanding of the inner workings of web applications. The aim is to be comfortable building projects by implementing common techniques such as directory structures, URL routers and utilizing MVC patterns.
 
 # SCOPE:
-	## Planning and design:
+	##Planning and design:
 	    * Learn how to leverage MVC pattern and designing program   
           execution flow
 	## Application Features:
