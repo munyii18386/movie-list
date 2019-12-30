@@ -45,6 +45,31 @@
 
 # EVALUATION/ASSESSMENT METHOD:
 > Once a week, there will be scheduled  in-person hourly meeting. During this meeting, I will have to showcase or explain the progress of the project. To narrow down the scope of the meeting, I have itemized what will be reviewed and/or assessed.  Any feedback and/or suggestions will be incorporated into the next week. 
+|Week |                                                                                                                 |
+|-----|-----------------------------------------------------------------------------------------------------------------|
+|1    |written, non-technical description of the project.                                                               |
+|     |Technical Description of all the project components. A wireframe for theclient interface, an initial database            schema and an architectural diagram on the initial flow between client, server and database component            |
+|     |Registered domain                                                                                                |
+|     |Create and initialize a gitHub repo. Include the non-technical and technical description in the README file.             This file will serve as the table to content for the entire project                                              |
+
+|2&3  |Initial deployment of a simple “Hello World” program to serve as confirmation of a working environment	. This         test case will have a dedicated end point                                                                         |
+|     |Organize and keep track of events in one location for easy access using a custom process or a third party                library                                                                                                          |
+|     |Write a simple test case to demonstrate working knowledge of how test cases can ensure quality and integrity.    |
+|     |Each additional week, additional test cases specific to the project will be required.                            |
+|     |Update the technical description in the README file to include a contingency backup and recovery plan            |
+
+|4    |Text files                            |
+|5    |HTTP form                             |
+|     |                                      |
+|6    |Databases                             |
+|     |                                      |
+|7    |Data storage and session              |
+|8    |Web Services                          |
+|     |                                      |
+|     |                                      |
+|9    |Final Project                         |
+|10   |Final Project                         |
+
 # RESOURCES:
 > This project is designed to expand hands on experience beyond what was taught  in prior classes. There will be overlapping reference to material still  available via Canvas. In addition, the internet will be a valuable resource to get knowledge. I chose the following links because they either are guides/tutorials from the software or platforms I may be using or because in my prior experience the authors have been able to explain subject matters in simplified terms and as such I am able to apply the principles to my own projects. 
 
