@@ -57,17 +57,22 @@
 |     |Write a simple test case to demonstrate working knowledge of how test cases can ensure quality and integrity.    |
 |     |Each additional week, additional test cases specific to the project will be required.                            |
 |     |Update the technical description in the README file to include a contingency backup and recovery plan            |
-|4    |Text files                            |
-|5    |HTTP form                             |
-|     |                                      |
-|6    |Databases                             |
-|     |                                      |
-|7    |Data storage and session              |
-|8    |Web Services                          |
-|     |                                      |
-|     |                                      |
-|9    |Final Project                         |
-|10   |Final Project                         |
+|4    |Use  text processing tools like XML, JSON, Regexp and templates to produce or handle received text content       |
+|     |To demonstrate the use of text processing tools, write logs and error events to a static file.                   |
+|5    |Create and deploy client pages that has at least 2-3 pages i.e a login page, a home page etc                     |
+|     |Define API endpoints. Functionally is not required at this point but should map from server to client or server         to database as applicable. These endpoints can be comments in the file.                                           |
+|6    |Refine the initial database schema if needed. Update the README file accordingly                                 |
+|     |Create and deploy database(s) . Ensure tables are created and populate with one default row                      |
+|7    |Reinforce security by ensuring confidential data is encrypted correctly                                          |
+|     |Add functionality to ensure that use input is always validated and sanitized before storing the data. This could         be as simple as returning an error if a user does not provide valid input values.                                |
+|     |At this point, the client should have a sign-in/login interface. The user should have an active session once             logged in. The  server should be able to handle authentication and sessions. Use applicable functionality and             storage (such as redis) to handle authentication and session requests.                                          |
+|     |Re-deploy the client and server updates. Ensure the changes reflect on the domain. Measure of completion will be         determined by the ability to login and logout from the domain                                                    |
+|8    |Establish a WebSocket connection that updates the client interface                                               |
+|     |The client should be able to create a new connection. In the event of failure, the client should handle failure          elegantly.                                                                                                       |
+|     |Connections should be stored in a thread-safe data structure                                                     |
+|     |Include proper validation to ensure only valid or authenticated users receive the upgraded connection            |
+|9&10 |No deliverables. Work on final touches on project                                                                |
+|     |If no further work is required, submit final product for approval or demo                                        |
 
 # RESOURCES:
 > This project is designed to expand hands on experience beyond what was taught  in prior classes. There will be overlapping reference to material still  available via Canvas. In addition, the internet will be a valuable resource to get knowledge. I chose the following links because they either are guides/tutorials from the software or platforms I may be using or because in my prior experience the authors have been able to explain subject matters in simplified terms and as such I am able to apply the principles to my own projects. 
