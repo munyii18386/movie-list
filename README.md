@@ -23,11 +23,13 @@
 
 |Week |Milestone                             |Objectives                                      |
 |-----|--------------------------------------|------------------------------------------------|
-|0    |Basic Setup and Configuration         |Identify project tools, software and/or platform|
-|1    |Web foundation                        |Identify project tools, software and/or platform|
-|2    |Deployment and maintenance            |Identify project tools, software and/or platform|
-|3    |Error handling, debugging and testing |Identify project tools, software and/or platform|
-|4    |Text files                            |Practice how to produce and/or handle received text content, including but not limited to strings, numbers, JSON, XML|
+|0    |Basic Setup and Configuration         |Identify project tools, software and/or platform                    |
+|1    |Web foundation                        |Understand HTTP operating mechanism                                 |
+|     |                                      |Review client side basics                                           |
+|2    |Deployment and maintenance            |Generate logs and the process of logging                            |
+|     |                                      |How to deal and manage runtime errors                               |
+|3    |Error handling, debugging and testing |Design application with proper error handling, test cases etc       |
+|4    |Text files                            |Practice how to produce and/or handle received text content, including but                                                                         not limited to strings, numbers, JSON, XML|
 |5    |HTTP form                             |Deployment and configuration                                        |
 |     |                                      |Explore the ability to communicate between clients and servers      |
 |6    |Databases                             |Review CRUD                                                         |
