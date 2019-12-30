@@ -27,15 +27,17 @@
 |1    |Web foundation                        |Identify project tools, software and/or platform|
 |2    |Deployment and maintenance            |Identify project tools, software and/or platform|
 |3    |Error handling, debugging and testing |Identify project tools, software and/or platform|
-|4    |Text files                            |Identify project tools, software and/or platform|
-|5    |HTTP form                             |Identify project tools, software and/or platform|
-|6    |Databases                             |Identify project tools, software and/or platform|
-|7    |Data storage and session              |Identify project tools, software and/or platform|
-|8    |Web Services                          |- Explore how to design web services that are platform independent|
-|     |                                      |- Explore socket communication                                    |
-|     |                                      |- Explore REST architecture                                       |
-|9    |Final Project                         |- Review and apply any stretch goals as applicable|
-|10   |Final Project                         |- Review and apply any stretch goals as applicable|
+|4    |Text files                            |Practice how to produce and/or handle received text content, including but not limited to strings, numbers, JSON, XML|
+|5    |HTTP form                             |Deployment and configuration                                        |
+|     |                                      |Explore the ability to communicate between clients and servers      |
+|6    |Databases                             |Review CRUD                                                         |
+|     |                                      |Analyze pros and cons of SQL vs NoSQl within project scope          |
+|7    |Data storage and session              |Understand how to control the whole process of viewing web for users|
+|8    |Web Services                          |Explore how to design web services that are platform independent    |
+|     |                                      |Explore socket communication                                        |
+|     |                                      |Explore REST architecture                                           |
+|9    |Final Project                         |Review and apply any stretch goals as applicable                    |
+|10   |Final Project                         |Review and apply any stretch goals as applicable                    |
 # EXPECTED OUTCOME:
 > At the end of the schedule it is expected that there will be a working application in place that meets the following criteria: A web API server. a fully functional client interface and  appropriate database usage
 
