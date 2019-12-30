@@ -47,3 +47,18 @@
 > Once a week, there will be scheduled  in-person hourly meeting. During this meeting, I will have to showcase or explain the progress of the project. To narrow down the scope of the meeting, I have itemized what will be reviewed and/or assessed.  Any feedback and/or suggestions will be incorporated into the next week. 
 # RESOURCES:
 > This project is designed to expand hands on experience beyond what was taught  in prior classes. There will be overlapping reference to material still  available via Canvas. In addition, the internet will be a valuable resource to get knowledge. I chose the following links because they either are guides/tutorials from the software or platforms I may be using or because in my prior experience the authors have been able to explain subject matters in simplified terms and as such I am able to apply the principles to my own projects. 
+
+- https://astaxie.gitbooks.io/build-web-application-with-golang/en/
+- https://docs.djangoproject.com/en/3.0/intro/tutorial01/
+- https://www.tutorialspoint.com/nodejs/nodejs_express_framework.htm
+- https://docs.docker.com/get-started/
+- https://devcenter.heroku.com/start
+- http://tutorials.jenkov.com/software-architecture/index.html
+- https://www.tutorialspoint.com/software_architecture_design/introduction.htm
+- https://www.tutorialspoint.com/design_pattern/mvc_pattern.htm
+- https://www.rabbitmq.com/tutorials/tutorial-one-go.html
+- https://docs.mongodb.com/manual/tutorial/ 
+- https://redislabs.com/ebook/part-1-getting-started/chapter-1-getting-to-know-redis/
+- http://www.mysqltutorial.org/
+- https://docs.google.com/document/d/1WJqojo22sBHqSJED_waGpNHzvDKzyrQrmruJk_v69EM/edit
+
