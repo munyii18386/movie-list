@@ -19,3 +19,17 @@
 ## Auxiliary Functionality:
 > - Better understand common functionality such as log processing, information configuration etc.
 
+# SCHEDULE:
+
+|Week |Milestone                     |Objectives                                      |
+|-----|------------------------------|------------------------------------------------|
+|0    |Basic Setup and Configuration |Identify project tools, software and/or platform|
+|-----|------------------------------|------------------------------------------------|
+
+# EXPECTED OUTCOME:
+> At the end of the schedule it is expected that there will be a working application in place that meets the following criteria: A web API server. a fully functional client interface and  appropriate database usage
+
+# EVALUATION/ASSESSMENT METHOD:
+> Once a week, there will be scheduled  in-person hourly meeting. During this meeting, I will have to showcase or explain the progress of the project. To narrow down the scope of the meeting, I have itemized what will be reviewed and/or assessed.  Any feedback and/or suggestions will be incorporated into the next week. 
+# RESOURCES:
+> This project is designed to expand hands on experience beyond what was taught  in prior classes. There will be overlapping reference to material still  available via Canvas. In addition, the internet will be a valuable resource to get knowledge. I chose the following links because they either are guides/tutorials from the software or platforms I may be using or because in my prior experience the authors have been able to explain subject matters in simplified terms and as such I am able to apply the principles to my own projects. 
