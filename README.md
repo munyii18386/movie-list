@@ -45,6 +45,7 @@
 
 # EVALUATION/ASSESSMENT METHOD:
 > Once a week, there will be scheduled  in-person hourly meeting. During this meeting, I will have to showcase or explain the progress of the project. To narrow down the scope of the meeting, I have itemized what will be reviewed and/or assessed.  Any feedback and/or suggestions will be incorporated into the next week. 
+
 |Week |                                                                                                                 |
 |-----|-----------------------------------------------------------------------------------------------------------------|
 |1    |written, non-technical description of the project.                                                               |
