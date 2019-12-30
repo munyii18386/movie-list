@@ -52,13 +52,11 @@
 |     |Technical Description of all the project components. A wireframe for theclient interface, an initial database            schema and an architectural diagram on the initial flow between client, server and database component            |
 |     |Registered domain                                                                                                |
 |     |Create and initialize a gitHub repo. Include the non-technical and technical description in the README file.             This file will serve as the table to content for the entire project                                              |
-
 |2&3  |Initial deployment of a simple “Hello World” program to serve as confirmation of a working environment	. This         test case will have a dedicated end point                                                                         |
 |     |Organize and keep track of events in one location for easy access using a custom process or a third party                library                                                                                                          |
 |     |Write a simple test case to demonstrate working knowledge of how test cases can ensure quality and integrity.    |
 |     |Each additional week, additional test cases specific to the project will be required.                            |
 |     |Update the technical description in the README file to include a contingency backup and recovery plan            |
-
 |4    |Text files                            |
 |5    |HTTP form                             |
 |     |                                      |
