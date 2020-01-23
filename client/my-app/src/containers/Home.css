@@ -1,0 +1,13 @@
+.Home .landing {
+    padding: 80px 0;
+    text-align: center;
+}
+
+.Home .landing h1 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: 600;
+}
+
+.Home .landing p {
+    color: #999;
+}
