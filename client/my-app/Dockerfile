@@ -4,17 +4,17 @@ FROM node:9.5 as builder
 RUN mkdir /usr/src/app
 WORKDIR /usr/src/app
 
-#COPY packages.json packages.json
 
 ENV PATH /usr/src/app/node_modules/.bin:$PATH
 
 ADD package.json /usr/src/app/package.json
 RUN npm install
 RUN npm install -g react-scripts@1.1.1
+RUN npm install -g serve
 
 COPY . .
 RUN npm run build
-RUN npm install -g serve
+
 
 RUN ["pwd"]
 RUN ["ls"]
