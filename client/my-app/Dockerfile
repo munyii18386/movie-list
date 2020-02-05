@@ -16,8 +16,10 @@ COPY . .
 RUN npm run build
 
 
-RUN ["pwd"]
-RUN ["ls"]
+# RUN ["pwd"]
+# RUN ["ls"]
+
+EXPOSE 5000
 
 CMD [ "serve", "-s", "build"]
 

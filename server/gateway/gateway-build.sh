@@ -11,7 +11,7 @@ docker build -t lmburu/gateway .
 go clean
 
 # push the container image to Docker Hub
-docker push lmburu/gateway:latest
+docker push lmburu/gateway
 
 # Starts web server
-ssh ec2-user@ec2-13-59-0-236.us-east-2.compute.amazonaws.com  < deploy.sh
+ssh -T ec2-user@ec2-13-59-0-236.us-east-2.compute.amazonaws.com  < gateway-deploy.sh
