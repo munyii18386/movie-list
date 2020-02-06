@@ -20,6 +20,7 @@ export class  Login extends Component {
 
     handleInput(e){
         console.log(this.state.email)
+        console.log(this.state.password)
     }
 
     render(){
@@ -33,7 +34,7 @@ export class  Login extends Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control size="lg" type="password" placeholder="Password" />
+                        <Form.Control onChange={(e)=>{this.setState({password: e.target.value})}}size="lg" type="password" placeholder="Password" />
                     </Form.Group>
                     <Button onClick={(e)=>{this.handleInput(e)}}variant="primary" block type="submit">Login</Button>
                 </Form>

@@ -1,10 +1,16 @@
-import React from "react";
+import React, {Component} from "react";
 import "./NotFound.css";
 
-export default function NotFound() {
-  return (
-    <div className="NotFound">
-      <h3>Sorry, page not found!</h3>
-    </div>
-  );
+export class NotFound extends Component{
+  constructor(){
+    super()
+    this.state={}
+  }
+  render(){
+    return (
+      <div className="NotFound">
+        <h3>Sorry, page not found!</h3>
+      </div>
+    )
+  }
 }
