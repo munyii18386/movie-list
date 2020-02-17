@@ -8,7 +8,8 @@ export class  Login extends Component {
         super()
         this.state = {
             email: "",
-            password: ""
+            password: "",
+            disabled: true
         }
     }
 
@@ -18,7 +19,16 @@ export class  Login extends Component {
         
     }
 
+    handleEmail(e){
+        this.setState({email: e.target.value})
+    }
+
+    handlePassword(e){
+        this.setState({password: e.target.value})
+    }
+
     handleInput(e){
+        console.log(e.target.id)
         console.log(this.state.email)
         console.log(this.state.password)
     }
@@ -30,13 +40,13 @@ export class  Login extends Component {
                 <Form onSubmit={(event) =>{this.handleSubmit(event)}}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control onChange={(e)=>{this.setState({email: e.target.value})}} size="lg"  type="email" placeholder="Enter email" />
+                        <Form.Control onChange={(e)=>{this.handleEmail(e)}} size="lg"  type="email" placeholder="Enter email" />
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control onChange={(e)=>{this.setState({password: e.target.value})}}size="lg" type="password" placeholder="Password" />
+                        <Form.Control id="pass" disabled={this.state.disabled}  onChange={(e)=>{this.handlePassword(e)}}size="lg" type="password" placeholder="Password" />
                     </Form.Group>
-                    <Button onClick={(e)=>{this.handleInput(e)}}variant="primary" block type="submit">Login</Button>
+                    <Button id="login-button" disabled={this.state.disabled} onClick={(e)=>{this.handleInput(e)}}variant="primary" block type="submit">Login</Button>
                 </Form>
             </div>
         )
