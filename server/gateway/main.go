@@ -1,6 +1,7 @@
 package main
 
 import (
+	// "github.com/gorilla/mux"
 	"fmt"
 	"log"
 	"net/http"
@@ -8,7 +9,7 @@ import (
 	"net/url"
 	"os"
 	"time"
-	h "movie-list/server/gateway/handlers"
+	// h "movie-list/server/gateway/handlers"
 	"strings"
 	"sync"
 	"sync/atomic"
@@ -85,7 +86,7 @@ func main() {
 	}
 
 	tlsKeyPath := os.Getenv("TLSKEY")
-	tlsCertPath := os.Getenv("TLSCERT")
+	tlsCertPath := os.Getenv("TLSCERT") 
 
 	fmt.Printf("reactAddr: %s", reactAddr)
 
@@ -93,15 +94,16 @@ func main() {
 
 	reactProxy := httputil.NewSingleHostReverseProxy(&url.URL{Scheme: "http", Host: reactAddr})
 	// reactProxy := NewServiceProxy(reactURLS)
+	
 
-	mux := http.NewServeMux()
-	mux.HandleFunc("/hello", HelloHandler)
-	mux.HandleFunc("/signup", h.SignUp)
-	mux.Handle("/", reactProxy)
+	r := http.NewServeMux()
+	r.HandleFunc("/hello", HelloHandler)
+	// r.Handle("/SignUp", h.SignUp(reactProxy))
+	r.Handle("/", reactProxy)
 
-	wrappedMux := NewSetHeader(mux)
+	
 
 	fmt.Printf("listening on %s...\n", addr)
-	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath, wrappedMux))
+	log.Fatal(http.ListenAndServeTLS(addr, tlsCertPath, tlsKeyPath, r))
 
 }

@@ -1,11 +1,12 @@
 package handlers
 
 import(
-    "fmt"
-	"log"
-	"encoding/json"
-	"io/ioutil"
-	"net/http"
+    // "fmt"
+	// "log"
+	// "os"
+	// "encoding/json"
+	// "io/ioutil"
+	// "net/http"
 )
 
 //NewUser represents a new user signing up for an account
@@ -19,31 +20,32 @@ type NewUser struct {
 
 
 // SignUp handles 
-func SignUp (w http.ResponseWriter, r *http.Request) {
+// func (p *ReverseProxy) SignUp (w http.ResponseWriter, r *http.Request) {
 
-	if r.Method == http.MethodPost{
-		var u NewUser
-		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			panic(err)
-		}
-		log.Println(string(body)) 
+// 	f, err := os.Create("/tmp/input")
+// 	if err != nil {
+//         panic(err)
+// 	}
+// 	defer f.Close()
 
-		err = json.Unmarshal(body, &u)
+// 	if r.Method == http.MethodPost{
+// 		var u NewUser
+// 		body, err := ioutil.ReadAll(r.Body)
+// 		if err != nil {
+// 			panic(err)
+// 		}
+// 		log.Println(string(body)) 
 
-		if err != nil {
-			panic(err)
-		}
+// 		err = json.Unmarshal(body, &u)
 
-		log.Println(u.Email)
+// 		if err != nil {
+// 			panic(err)
+// 		}
 
-		w.WriteHeader(http.StatusOK)
-		w.Write([]byte(u.Email))
-
-		fmt.Println(u)
+// 		f.WriteString(u.Email)
 		
-	}
+// 	}
 
 	
 
-}
+// }

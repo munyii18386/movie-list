@@ -8,6 +8,8 @@ import "./SignUp.css";
 export class SignUp extends Component{
     constructor(){
         super()
+        this.handleChange =  this.handleChange.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
         this.state={
             FirstName:"",
             LastName:"",
@@ -33,7 +35,7 @@ export class SignUp extends Component{
 
     handleSubmit(e){
         e.preventDefault();
-        axios.post('https://oddgarden.com/signup', this.state)
+        axios.post('http://localhost/SignUp', this.state)
             .then((r) =>{
                 console.log(r)
                 this.state.NewUser = true
@@ -70,7 +72,8 @@ export class SignUp extends Component{
                         <Form.Control id="pass2" onChange={(e)=>{this.handleChange(e)}} size="lg" type="password" placeholder="Re-enter Password" />
                     </Form.Group>
                 </Form.Row>
-                <Button onSubmit={(e)=>{this.handleSubmit(e)}} block variant="primary" type="submit">Sign Up</Button>
+                <Button  onSubmit={(e)=>{this.handleSubmit(e)}} block variant="primary" type="submit">Sign Up</Button>
+                {/*  onSubmit={(e)=>{this.handleSubmit(e)}}*/}
             </Form>
             </Container>
         )
