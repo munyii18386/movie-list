@@ -3,8 +3,8 @@
 docker rm -f wom-api
 
 
-export TLSCERT=/certs/fullchain.pem
-export TLSKEY=/certs/privkey.pem
+export TLSCERT=/certs/server.crt
+export TLSKEY=/certs/server.key
 
 docker run -d --name wom-api \
 -p 443:443 \

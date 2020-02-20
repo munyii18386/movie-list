@@ -34,11 +34,12 @@ export class SignUp extends Component{
     }
 
     handleSubmit(e){
-        e.preventDefault();
-        axios.post('http://localhost/SignUp', this.state)
+        e.preventDefault()
+        axios.post('https://oddgarden.net/api/signup', this.state)
             .then((r) =>{
                 console.log(r)
                 this.state.NewUser = true
+                console.log(this.state)
             })
             .catch(function (error) {
                 console.log(error);
