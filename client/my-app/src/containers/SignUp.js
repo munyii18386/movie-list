@@ -1,6 +1,9 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom" 
 import axios from "axios";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
+import {Home} from './Home';
+import {Login} from './Login';
 import "./SignUp.css";
 
 
@@ -32,25 +35,43 @@ export class SignUp extends Component{
         }
         console.log(this.state)
     }
-
-    handleSubmit(e){
-        e.preventDefault()
-        axios.post('https://oddgarden.net/api/signup', this.state)
-            .then((r) =>{
-                console.log(r)
-                this.state.NewUser = true
-                console.log(this.state)
-            })
-            .catch(function (error) {
+   
+  
+    handleSubmit = event => {
+            // axios({
+            //     method: 'post',
+            //     url: 'https://oddgarden.net/api/SignUp',
+            //     data: this.state
+            //   })
+            //  .then((response) =>{
+            //      console.log(response.data)
+            //     this.state.NewUser = true
+            //     console.log(this.state)
+            // })
+            // .catch(function (error) {
+            //     console.log(error);
+            // })
+            event.preventDefault()
+            axios.post('https://localhost/api/SignUp', this.state)
+              .then((response) => {
+                console.log(response.data.Status);
+                this.setState({NewUser: response.data.Status})
+                console.log(this.state);
+              })
+              .catch(function (error) {
                 console.log(error);
-            });
-        
+              });
+            
     }
+  
 
     render(){
+        if (this.state.NewUser === "true") {
+            return <Redirect to='/login' exact component={Login}/>
+        }
         return(
             <Container className="SignUP">
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Control id="firstname" onChange={(e)=>{this.handleChange(e)}} size="lg" placeholder="First Name" />
@@ -73,7 +94,7 @@ export class SignUp extends Component{
                         <Form.Control id="pass2" onChange={(e)=>{this.handleChange(e)}} size="lg" type="password" placeholder="Re-enter Password" />
                     </Form.Group>
                 </Form.Row>
-                <Button  onSubmit={(e)=>{this.handleSubmit(e)}} block variant="primary" type="submit">Sign Up</Button>
+                <Button block variant="primary" type="submit">Sign Up</Button>
                 {/*  onSubmit={(e)=>{this.handleSubmit(e)}}*/}
             </Form>
             </Container>
