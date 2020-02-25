@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	// "github.com/gorilla/mux"
 	"fmt"
 	"log"
 	"net/http"
@@ -10,7 +9,7 @@ import (
 	"net/url"
 	"os"
 	execute "movie-list/server/gateway/handlers"
-	
+	"movie-list/server/database"
 	_ "github.com/go-sql-driver/mysql"
 	
 )
@@ -20,7 +19,6 @@ import (
 func HelloHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello World!"))
 }
-
 
 
 
@@ -54,12 +52,14 @@ func main() {
         fmt.Printf("successfully connected!\n")
 	}
 	
-	
+	hub := database.CreateInstance(db)
+
+	ctx := execute.Context{Users: hub}
 	
 	// routes
 	r := http.NewServeMux()
 	r.HandleFunc("/hello", HelloHandler)
-	r.HandleFunc("/api/SignUp", execute.SignUpHandler)
+	r.HandleFunc("/api/SignUp", ctx.SignUpHandler)
 	r.Handle("/", reactProxy)
 
 	// cors wrapper
