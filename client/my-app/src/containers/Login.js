@@ -8,8 +8,7 @@ export class  Login extends Component {
         super()
         this.state = {
             email: "",
-            password: "",
-            disabled: true
+            password: ""
         }
     }
 
@@ -44,9 +43,9 @@ export class  Login extends Component {
                     </Form.Group>
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control id="pass" disabled={this.state.disabled}  onChange={(e)=>{this.handlePassword(e)}}size="lg" type="password" placeholder="Password" />
+                        <Form.Control id="pass"   onChange={(e)=>{this.handlePassword(e)}}size="lg" type="password" placeholder="Password" />
                     </Form.Group>
-                    <Button id="login-button" disabled={this.state.disabled} onClick={(e)=>{this.handleInput(e)}}variant="primary" block type="submit">Login</Button>
+                    <Button id="login-button"  onClick={(e)=>{this.handleInput(e)}}variant="primary" block type="submit">Login</Button>
                 </Form>
             </div>
         )

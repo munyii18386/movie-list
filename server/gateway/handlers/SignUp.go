@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"time"
 	"fmt"
 	"log"
 
@@ -8,105 +9,118 @@ import (
 	"encoding/json"
 	"errors"
 	"io/ioutil"
-	"movie-list/server/gateway/models"
 	"net/http"
 	"net/mail"
 
 	"golang.org/x/crypto/bcrypt"
 )
 
-//NewUser represents a new user signing up for an account
-type NewUser struct {
-	Email        string `json:"email"`
-	Password     string `json:"password"`
-	PasswordConf string `json:"passwordConf"`
-	FirstName    string `json:"firstName"`
-	LastName     string `json:"lastName"`
+
+func handleError (err error){
+	if err != nil{
+		fmt.Printf("Error Generated is: %v\n", err)
+	}
 }
 
-// //User represents a user account in the database
-// type User struct {
-// 	ID        int64  `json:"id"`
-// 	Email     string `json:"-"` //never JSON encoded/decoded
-// 	PassHash  []byte `json:"-"` //never JSON encoded/decoded
-// 	FirstName string `json:"firstName"`
-// 	LastName  string `json:"lastName"`
-// }
-
-// ConfUser ................
-type ConfUser struct {
-	ID     string
-	Name   string
-	Status string
+func exit (err error){
+	if err != nil {
+		panic(err)
+	}
 }
 
-// Context .................................
-type Context struct {
-	Users models.Hub
-}
 
 // SignUpHandler handles
 func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	var u NewUser
-	var resp ConfUser
-
+	
 	fmt.Println("I am here")
 	if r.Method == http.MethodPost {
 
 		body, err := ioutil.ReadAll(r.Body)
-		if err != nil {
-			panic(err)
-		}
+		exit(err)
 		log.Println(string(body))
 
 		err = json.Unmarshal(body, &u)
-
-		if err != nil {
-			panic(err)
-		}
+		exit(err)
 
 		fmt.Println(u)
 
+		//check first name length
+		if ((len(u.FirstName) < 1) || (u.FirstName == "")) {
+			err = errors.New("First Name is less than 6 characters")
+			handleError(errors.New("First Name is less than 6 characters"))
+		}
+	
+		// check last name length
+		if ((len(u.LastName) < 1) || (u.LastName == "")) {
+			err = errors.New("Last Name is less than 6 characters")
+			handleError(errors.New("Last Name is less than 6 characters"))
+		}
+
+		// check email length
+		if len(u.Email) < 1 {
+			err = errors.New("Email is less than 6 characters")
+			handleError(errors.New("Email is less than 6 characters"))
+		}
+
 		// check if email is valid
 		addr, err := mail.ParseAddress(u.FirstName + " " + u.LastName + "<" + u.Email + ">")
-		if err != nil {
-			err = errors.New("Invalid Email Address")
-		}
+		handleError(err)
 
 		// check that passwords match
 		if u.Password != u.PasswordConf {
 			err = errors.New("Password and PasswordConf do not match")
+			handleError(err)
 		}
 		// check password length
 		if len(u.Password) < 6 {
 			err = errors.New("Password is less than 6 characters")
-		}
-		// hash password
-		passhash, err := bcrypt.GenerateFromPassword([]byte(u.Password), 13)
-		if err != nil {
-			fmt.Printf("error generating bcrypt hash: %v\n", err)
-		}
-		fmt.Println("this is the password hash: ", string(passhash))
-
-		user := &models.User{
-			Email:     addr.Address,
-			PassHash:  passhash,
-			FirstName: u.FirstName,
-			LastName:  u.LastName,
-		}
-		fmt.Printf("%+v\n", user)
-
-		_, err = ctx.Users.Insert(user)
-
-		w.WriteHeader(http.StatusCreated)
-		w.Header().Add("Content-Type", "application/json")
-		resp.ID = "1"
-		resp.Name = "Lilia"
-		err = json.NewEncoder(w).Encode(resp)
-		if err != nil {
-			http.Error(w, "Bad request", http.StatusBadRequest)
+			handleError(err)
 		}
 
+		if (err == nil){
+			// hash password
+			passhash, err := bcrypt.GenerateFromPassword([]byte(u.Password), 13)
+			handleError(err)
+			fmt.Println("this is the password hash: ", string(passhash))
+			user := &User{
+				Email:     addr.Address,
+				PassHash:  passhash,
+				FirstName: u.FirstName,
+				LastName:  u.LastName,
+			}
+			fmt.Printf("%+v\n", user)
+			person, err := ctx.UserDatabase.Insert(user)
+			handleError(err)
+	
+			
+			state := SessionState{SessionTime: time.Now(), User: person}
+			fmt.Printf("STATE: %+v\n", state)
+			sid, err := StartSession(ctx.SessionKey, ctx.RedisDatabase, state, w )
+			fmt.Println("SID: ", sid)
+			
+
+			if err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+				return
+			}
+
+			profile := &Profile{
+				ID: person.ID, 
+				Email: person.Email,
+				FirstName: person.FirstName,
+				Status: "true",
+			}
+			fmt.Printf("the user info from the database: %+v\n", profile)
+
+			w.WriteHeader(http.StatusCreated)
+			w.Header().Add("Content-Type", "application/json")
+			err = json.NewEncoder(w).Encode(profile)
+			if err != nil {
+				http.Error(w, "Bad request", http.StatusBadRequest)
+			}
+		}
+		
 	}
 
 }

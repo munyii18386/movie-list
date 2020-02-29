@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom" 
 import axios from "axios";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
-import {Home} from './Home';
-import {Login} from './Login';
+import {MyWall} from './MyWall';
 import "./SignUp.css";
 
 
@@ -19,7 +18,7 @@ export class SignUp extends Component{
             Email:"",
             Password:"",
             PasswordConf:"",
-            NewUser: false,
+            Status: ""
         }
     }
 
@@ -33,29 +32,17 @@ export class SignUp extends Component{
             case "pass2": this.state.PasswordConf = e.target.value
 
         }
+      
         console.log(this.state)
     }
    
   
     handleSubmit = event => {
-            // axios({
-            //     method: 'post',
-            //     url: 'https://oddgarden.net/api/SignUp',
-            //     data: this.state
-            //   })
-            //  .then((response) =>{
-            //      console.log(response.data)
-            //     this.state.NewUser = true
-            //     console.log(this.state)
-            // })
-            // .catch(function (error) {
-            //     console.log(error);
-            // })
             event.preventDefault()
             axios.post('https://localhost/api/SignUp', this.state)
               .then((response) => {
-                console.log(response.data.Status);
-                this.setState({NewUser: response.data.Status})
+                console.log(response);
+                this.setState({Status: response.data.status})
                 console.log(this.state);
               })
               .catch(function (error) {
@@ -66,8 +53,8 @@ export class SignUp extends Component{
   
 
     render(){
-        if (this.state.NewUser === "true") {
-            return <Redirect to='/login' exact component={Login}/>
+        if (this.state.Status == "true") {
+            return <Redirect to='/mywall' exact component={MyWall}/>
         }
         return(
             <Container className="SignUP">
@@ -78,7 +65,7 @@ export class SignUp extends Component{
                     </Form.Group>
 
                     <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Control id="lastname" onChange={(e)=>{this.handleChange(e)}} size="lg" placeholder="Last Name" />
+                        <Form.Control  id="lastname" onChange={(e)=>{this.handleChange(e)}} size="lg" placeholder="Last Name" />
                     </Form.Group>
                 </Form.Row>
 
@@ -94,8 +81,7 @@ export class SignUp extends Component{
                         <Form.Control id="pass2" onChange={(e)=>{this.handleChange(e)}} size="lg" type="password" placeholder="Re-enter Password" />
                     </Form.Group>
                 </Form.Row>
-                <Button block variant="primary" type="submit">Sign Up</Button>
-                {/*  onSubmit={(e)=>{this.handleSubmit(e)}}*/}
+                <Button  block variant="primary" type="submit">Sign Up</Button>
             </Form>
             </Container>
         )

@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/go-redis/redis"
 	"database/sql"
 	"fmt"
 	"log"
@@ -32,6 +33,8 @@ func main() {
 	reactAddr := os.Getenv("REACT")
 	tlsKeyPath := os.Getenv("TLSKEY")
 	tlsCertPath := os.Getenv("TLSCERT")
+	redisAddr := os.Getenv("REDISADDR")
+	sessionKey := os.Getenv("SESSIONKEY")
 	dsn := os.Getenv("DSN")
 
 
@@ -51,10 +54,17 @@ func main() {
     } else {
         fmt.Printf("successfully connected!\n")
 	}
-	
-	hub := database.CreateInstance(db)
+	// create an instance
+	conn := database.CreateInstance(db)
 
-	ctx := execute.Context{Users: hub}
+	//redis connection
+	rdb := redis.NewClient(&redis.Options{
+		Addr: redisAddr,
+	})
+
+	redisInstance := execute.NewRedisInstance(rdb, 120000000000)
+
+	ctx := execute.Context{UserDatabase: conn, SessionKey: sessionKey, RedisDatabase: redisInstance}
 	
 	// routes
 	r := http.NewServeMux()

@@ -18,6 +18,7 @@ export class  Routes extends Component {
                 <Route path="/" exact component={Home} />
                 <Route path="/login" exact component={Login} />
                 <Route path="/signup" exact component={SignUp} />
+                <Route path="/mywall" exact component={MyWall} />
                 <Route component={NotFound} />
             </Switch>
         )
