@@ -65,6 +65,18 @@ func (rs *RedisInstance) Get(sid string, sessionState interface{}) error {
 
 //Delete deletes all state data associated with the SessionID from the store.
 func (rs *RedisInstance) Delete(sid string) error {
-	rs.Client.Del(sid)
+	key := "sid:" + sid
+	rs.Client.Del(key)
 	return nil
+}
+
+// Find retrieves value by key
+func (rs *RedisInstance) Find(sid string) {
+	
+	val := rs.Client.Do("GET", sid)
+
+	if val == nil {
+		fmt.Println("i exist")
+	}
+
 }

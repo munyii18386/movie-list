@@ -1,19 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {Container, Form, Button, Row, Col} from "react-bootstrap";
 import './Home.css';
 
-export class  Home extends Component{
-    constructor(){
-        super()
-        this.state={}
-    }
-    render(){
+export const Home = () => {
+   
         return(
-            <div className="Home">
+            <Container className="Home">
                 <div className="landing">
                     <h1>Wall Of Movies</h1>
                     <p>A simple movie list app</p>
                 </div>
-            </div>
+            </Container>
         )
-    }
 }

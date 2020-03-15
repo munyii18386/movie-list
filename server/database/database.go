@@ -46,3 +46,30 @@ func (obj *instance) LocateID(id int64) (*handlers.User, error) {
 	}
 	return &user, nil
 }
+
+// GetByEmail returns a user with a given email
+func (obj *instance) GetByEmail(email string) (*handlers.User, error) {
+	rows, e := obj.CONN.Query("SELECT * FROM User WHERE Email=?", email)
+	if e != nil {
+		return nil, errors.New("Failed to retrieve matching rows")
+	}
+	defer rows.Close()
+	c := handlers.User{}
+	for rows.Next() {
+		if err := rows.Scan(&c.ID, &c.Email, &c.PassHash, 
+			&c.FirstName, &c.LastName); err != nil {
+			fmt.Printf("error scanning row: %v\n", err)
+		}
+	}
+	return &c, e
+}
+
+
+// Delete removes a User with a given id from the db
+func (obj *instance) Delete(id int64) error {
+	_, e := obj.CONN.Exec("DELETE FROM User WHERE ID=?", id)
+	if e != nil {
+		return e
+	}
+	return e
+}

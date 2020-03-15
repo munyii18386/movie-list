@@ -7,10 +7,9 @@ import {SignUp} from "./containers/SignUp";
 import {Logout} from "./containers/Logout";
 import {MyWall} from "./containers/MyWall";
 import {Community} from "./containers/Community"
-import {AppContext} from './App';
+
 
 export const  Routes = () => {
-    const {state , dispatch } = React.useContext(AppContext);
     return(
         <Switch>
             <Route path="/" exact component={Home} />

@@ -31,6 +31,12 @@ type User struct {
 	LastName  string `json:"lastName"`
 }
 
+// LoginRequest represents the user email and password requesting authentication
+type LoginRequest struct{
+	Email        string `json:"email"`
+	Password     string `json:"password"`
+}
+
 // Context .................................
 type Context struct {
 	UserDatabase DatabaseStore
@@ -40,7 +46,10 @@ type Context struct {
 
 // DatabaseStore interface is 
 type DatabaseStore interface{
+	LocateID(id int64) (*User, error)
 	Insert(user *User) (*User, error)
+	GetByEmail(email string) (*User, error)
+	Delete(id int64) error
 }
 
 // SessionState stores session time and authenticated user
@@ -59,6 +68,8 @@ type RedisStore interface {
 	Get(sid string, sessionState interface{}) error
 	//Delete deletes all state data associated with the SessionID from the store.
 	Delete(sid string) error
+	// Find retrieves value by key
+	Find(sid string)
 
 }
 

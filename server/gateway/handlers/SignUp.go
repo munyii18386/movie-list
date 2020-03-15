@@ -16,17 +16,8 @@ import (
 )
 
 
-func handleError (err error){
-	if err != nil{
-		fmt.Printf("Error Generated is: %v\n", err)
-	}
-}
 
-func exit (err error){
-	if err != nil {
-		panic(err)
-	}
-}
+
 
 
 // SignUpHandler handles
@@ -37,51 +28,51 @@ func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 
 		body, err := ioutil.ReadAll(r.Body)
-		exit(err)
+		ExitTransaction(err)
 		log.Println(string(body))
 
 		err = json.Unmarshal(body, &u)
-		exit(err)
+		ExitTransaction(err)
 
 		fmt.Println(u)
 
 		//check first name length
 		if ((len(u.FirstName) < 1) || (u.FirstName == "")) {
 			err = errors.New("First Name is less than 6 characters")
-			handleError(errors.New("First Name is less than 6 characters"))
+			HandleError(errors.New("First Name is less than 6 characters"))
 		}
 	
 		// check last name length
 		if ((len(u.LastName) < 1) || (u.LastName == "")) {
 			err = errors.New("Last Name is less than 6 characters")
-			handleError(errors.New("Last Name is less than 6 characters"))
+			HandleError(errors.New("Last Name is less than 6 characters"))
 		}
 
 		// check email length
 		if len(u.Email) < 1 {
 			err = errors.New("Email is less than 6 characters")
-			handleError(errors.New("Email is less than 6 characters"))
+			HandleError(errors.New("Email is less than 6 characters"))
 		}
 
 		// check if email is valid
 		addr, err := mail.ParseAddress(u.FirstName + " " + u.LastName + "<" + u.Email + ">")
-		handleError(err)
+		HandleError(err)
 
 		// check that passwords match
 		if u.Password != u.PasswordConf {
 			err = errors.New("Password and PasswordConf do not match")
-			handleError(err)
+			HandleError(err)
 		}
 		// check password length
 		if len(u.Password) < 6 {
 			err = errors.New("Password is less than 6 characters")
-			handleError(err)
+			HandleError(err)
 		}
 
 		if (err == nil){
 			// hash password
 			passhash, err := bcrypt.GenerateFromPassword([]byte(u.Password), 13)
-			handleError(err)
+			HandleError(err)
 			fmt.Println("this is the password hash: ", string(passhash))
 			user := &User{
 				Email:     addr.Address,
@@ -91,7 +82,7 @@ func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 			}
 			fmt.Printf("%+v\n", user)
 			person, err := ctx.UserDatabase.Insert(user)
-			handleError(err)
+			HandleError(err)
 	
 			
 			state := SessionState{SessionTime: time.Now(), User: person}

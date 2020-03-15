@@ -70,6 +70,8 @@ func main() {
 	r := http.NewServeMux()
 	r.HandleFunc("/hello", HelloHandler)
 	r.HandleFunc("/api/SignUp", ctx.SignUpHandler)
+	r.HandleFunc("/api/Logout", ctx.LogoutHandler)
+	r.HandleFunc("/api/Login", ctx.LoginHandler)
 	r.Handle("/", reactProxy)
 
 	// cors wrapper

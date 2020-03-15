@@ -1,20 +1,24 @@
-import React  from "react";
+import React, {Component}  from "react";
 import axios from "axios";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
 import {MyWall} from './MyWall';
-import {AppContext} from '../App';
 import "./SignUp.css";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 
 export const SignUp = () => {
-    const {state , dispatch } = React.useContext(AppContext);
+    // const {state , dispatch } = React.useContext(AppContext);
+    const state  = useSelector(state => state);
+    const dispatch = useDispatch();
     const initialState={
             FirstName:"",
             LastName:"",
             Email:"",
             Password:"",
             PasswordConf:""
+
         }
     const [data, setData] = React.useState(initialState);
 
@@ -25,26 +29,24 @@ export const SignUp = () => {
           [event.target.name]: event.target.value
         });
     };
+
       
 
   
         const handleSubmit = event => {
             event.preventDefault()
-            setData({
-                ...data
-            });
             axios.post('https://localhost/api/SignUp', data)
               .then((response) => {
                 console.log(response);
-                // console.log("current user is authenticated: " + state.isAuthenticated);
+                console.log("current user is authenticated: " + state.isAuthenticated);
                 let user = response.data.firstName
                 let token = response.headers.authorization
+                let ok = true
                 console.log("user: " + user + "auth: " + token);
                 dispatch({
                     type: "SIGNUP",
                     payload: {user, token}  
                 })
-                console.log("dispatch" + dispatch);
               })
               .catch(function (error) {
                 console.log(error);
@@ -52,12 +54,14 @@ export const SignUp = () => {
             
         }
     
-  
-
- 
+    
+        
+    
+    
         return(
+            
             <Container className="SignUP">
-            {!state.isAuthenticated ? 
+            {state.isAuthenticated ? <MyWall /> :
             <Form onSubmit={handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">
@@ -106,12 +110,11 @@ export const SignUp = () => {
                     </Form.Group>
                 </Form.Row>
                 <Button  block variant="primary" type="submit">Sign Up</Button>
-            </Form>
-            : <MyWall />}
+            </Form>}
             
            </Container>
         )
-    // }
+    
 };
 
 export default SignUp;
