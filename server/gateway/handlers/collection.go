@@ -50,6 +50,8 @@ type DatabaseStore interface{
 	Insert(user *User) (*User, error)
 	GetByEmail(email string) (*User, error)
 	Delete(id int64) error
+	InsertMovie(umi *UserMovieInfo) (*UserMovieInfo, error)
+	LocateMovieByID(id int64) (*UserMovieInfo, error)
 }
 
 // SessionState stores session time and authenticated user
@@ -58,6 +60,28 @@ type SessionState struct {
 	User        *User `json:"user"`
 }
 
+type MovieDetail struct{
+	ID  string  `json:"id"`
+	URL string `json:"url"`
+	Title string `json:"title"`
+	Overview string `json:"overview"`
+}
+
+type UserMovieInfo struct{
+	MovieID  int64  `json:"id"`
+	UserID int64  `json:"id"`
+	URL string `json:"url"`
+	Title string `json:"title"`
+	Overview string `json:"overview"`
+}
+
+type Info struct{
+	MovieID  string `json:"movieid"`
+	UserID string `json:"userid"`
+	MovieURL string `json:"movie_url"`
+	Title string `json:"title"`
+	Overview string `json:"overview"`
+}
 
 //RedisStore represents a session data store.
 type RedisStore interface {
@@ -65,7 +89,7 @@ type RedisStore interface {
 	Save(sid string, sessionState interface{}) error
 	//Get populates `sessionState` with the data previously saved
 	//for the given SessionID
-	Get(sid string, sessionState interface{}) error
+	Get(sid string, sessionState interface{}) (interface{}, error)
 	//Delete deletes all state data associated with the SessionID from the store.
 	Delete(sid string) error
 	// Find retrieves value by key

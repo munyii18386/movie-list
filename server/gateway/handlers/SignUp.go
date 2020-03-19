@@ -24,7 +24,7 @@ import (
 func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 	var u NewUser
 	
-	fmt.Println("I am here")
+	// fmt.Println("I am here")
 	if r.Method == http.MethodPost {
 
 		body, err := ioutil.ReadAll(r.Body)
@@ -34,7 +34,7 @@ func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 		err = json.Unmarshal(body, &u)
 		ExitTransaction(err)
 
-		fmt.Println(u)
+		// fmt.Println(u)
 
 		//check first name length
 		if ((len(u.FirstName) < 1) || (u.FirstName == "")) {
@@ -73,20 +73,20 @@ func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 			// hash password
 			passhash, err := bcrypt.GenerateFromPassword([]byte(u.Password), 13)
 			HandleError(err)
-			fmt.Println("this is the password hash: ", string(passhash))
+			// fmt.Println("this is the password hash: ", string(passhash))
 			user := &User{
 				Email:     addr.Address,
 				PassHash:  passhash,
 				FirstName: u.FirstName,
 				LastName:  u.LastName,
 			}
-			fmt.Printf("%+v\n", user)
+			// fmt.Printf("%+v\n", user)
 			person, err := ctx.UserDatabase.Insert(user)
 			HandleError(err)
 	
 			
 			state := SessionState{SessionTime: time.Now(), User: person}
-			fmt.Printf("STATE: %+v\n", state)
+			// fmt.Printf("STATE: %+v\n", state)
 			sid, err := StartSession(ctx.SessionKey, ctx.RedisDatabase, state, w )
 			fmt.Println("SID: ", sid)
 			
@@ -102,7 +102,7 @@ func (ctx *Context) SignUpHandler(w http.ResponseWriter, r *http.Request) {
 				FirstName: person.FirstName,
 				Status: "true",
 			}
-			fmt.Printf("the user info from the database: %+v\n", profile)
+			// fmt.Printf("the user info from the database: %+v\n", profile)
 
 			w.WriteHeader(http.StatusCreated)
 			w.Header().Add("Content-Type", "application/json")

@@ -5,8 +5,8 @@ import {NotFound} from "./containers/NotFound";
 import {Login} from "./containers/Login";
 import {SignUp} from "./containers/SignUp";
 import {Logout} from "./containers/Logout";
-import {MyWall} from "./containers/MyWall";
-import {Community} from "./containers/Community"
+import {Search} from "./containers/Search";
+import {MovieWall} from "./containers/MovieWall"
 
 
 export const  Routes = () => {
@@ -16,7 +16,8 @@ export const  Routes = () => {
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={SignUp} />
             <Route path="/logout" exact component={Logout} />
-            <Route path="/mywall" exact component={MyWall} />
+            <Route path="/search" exact component={Search} />
+            <Route path="/moviewall" exact component={MovieWall} />
             <Route component={NotFound} />
         </Switch>
         )

@@ -2,7 +2,7 @@ import React from "react";
 import {Container, Form, Button} from "react-bootstrap";
 import axios from "axios";
 import { Redirect } from 'react-router-dom'
-import {MyWall} from './MyWall';
+import {Search} from './Search';
 import "./Login.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -60,7 +60,7 @@ export const Login = () => {
 
         return(
             <Container className="Login">
-            {state.isAuthenticated ?  <Redirect to='/mywall' /> :
+            {state.isAuthenticated ?  <Redirect to='/search' /> :
                 <Form onSubmit={handleSubmit}>
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>

@@ -57,6 +57,28 @@ func StartSession(sessionKey string, rs RedisStore, sessionState interface{}, w 
 	return sid, nil
 }
 
+//GetState extracts the SessionID from the request,
+//gets the associated state from the provided store into
+//the `sessionState` parameter, and returns the SessionID
+func GetState(sid string, sessionKey string, rs RedisStore, sessionState interface{}) (interface{}, error) {
+	token, err:= ValidateID(sid, sessionKey)
+
+	if err != nil {
+		return "invalid session", err
+	}
+
+	sessionState, err = rs.Get(token, sessionState)
+	// fmt.Printf("user is: %+v\n", sessionState)
+
+	if err != nil {
+		return "invalid session", err
+	}
+
+	fmt.Println("session successfully retrived", err)
+
+	return sessionState, nil
+
+}
 
 //EndSession extracts the SessionID from the request,
 //and deletes the associated data in the provided store, returning

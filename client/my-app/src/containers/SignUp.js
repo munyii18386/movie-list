@@ -1,7 +1,8 @@
 import React, {Component}  from "react";
+import { Redirect } from 'react-router-dom'
 import axios from "axios";
 import {Container, Form, Button, Row, Col} from "react-bootstrap";
-import {MyWall} from './MyWall';
+import {Search} from './Search';
 import "./SignUp.css";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -59,9 +60,9 @@ export const SignUp = () => {
     
     
         return(
-            
+           
             <Container className="SignUP">
-            {state.isAuthenticated ? <MyWall /> :
+            {state.isAuthenticated ? <Redirect to='/search' /> :
             <Form onSubmit={handleSubmit}>
                 <Form.Row>
                     <Form.Group as={Col} controlId="formGridEmail">

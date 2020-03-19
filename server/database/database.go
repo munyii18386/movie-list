@@ -18,6 +18,19 @@ func CreateInstance(conn *sql.DB) handlers.DatabaseStore {
 	}
 }
 
+func (obj *instance) InsertMovie(umi *handlers.UserMovieInfo) (*handlers.UserMovieInfo, error) {
+	q := "insert into Movie (UserID, MovieURL, MovieTitle, MovieOverview) values (?,?,?,?)"
+	result, err := obj.CONN.Exec(q, umi.UserID, umi.URL, umi.Title, umi.Overview)
+	if (err != nil){
+		return nil, err
+	}
+	id, _ := result.LastInsertId()
+	m , err := obj.LocateMovieByID(id)
+	return m, err
+}
+
+
+
 func (obj *instance) Insert(person *handlers.User) (*handlers.User, error){
 	q := "insert into User(Email, Passhash, FirstName, LastName) values (?,?,?,?)"
 	result, err := obj.CONN.Exec(q, person.Email, string(person.PassHash), person.FirstName, person.LastName)
@@ -64,6 +77,20 @@ func (obj *instance) GetByEmail(email string) (*handlers.User, error) {
 	return &c, e
 }
 
+func (obj *instance) LocateMovieByID(id int64) (*handlers.UserMovieInfo, error) {
+	movie := handlers.UserMovieInfo{}
+	if id < 0 {
+		return nil, errors.New("invalid primary key")
+	}
+	rows := obj.CONN.QueryRow("SELECT * FROM Movie WHERE id=?", id)
+	if err := rows.Scan(&movie.MovieID, &movie.UserID, &movie.URL, &movie.Title, &movie.Overview ); err != nil {
+		if err == sql.ErrNoRows {
+			return nil, fmt.Errorf("%s", "Movie not found")
+		}
+		return nil, fmt.Errorf("error scanning row: %v", err)
+	}
+	return &movie, nil
+}
 
 // Delete removes a User with a given id from the db
 func (obj *instance) Delete(id int64) error {

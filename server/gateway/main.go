@@ -72,6 +72,8 @@ func main() {
 	r.HandleFunc("/api/SignUp", ctx.SignUpHandler)
 	r.HandleFunc("/api/Logout", ctx.LogoutHandler)
 	r.HandleFunc("/api/Login", ctx.LoginHandler)
+	r.HandleFunc("/api/Wall", ctx.WallHandler)
+	r.HandleFunc("/api/GetWall", ctx.GetWallHandler)
 	r.Handle("/", reactProxy)
 
 	// cors wrapper

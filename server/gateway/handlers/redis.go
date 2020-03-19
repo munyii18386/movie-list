@@ -40,26 +40,28 @@ func (rs *RedisInstance) Save(sid string, sessionState interface{}) error {
 
 //Get populates `sessionState` with the data previously saved
 //for the given SessionID
-func (rs *RedisInstance) Get(sid string, sessionState interface{}) error {
+func (rs *RedisInstance) Get(sid string, sessionState interface{}) (interface{} , error) {
 	key := "sid:" + sid
 	list := rs.Client.Pipeline()
 	result := list.Get(key)
 	if result.Err() != nil{
-		return errors.New("no session state was found in the session store")
+		return sessionState, errors.New("no session state was found in the session store")
 	}
 	changeExpiration := list.Expire(key, rs.SessionDuration).Err()
 	if changeExpiration != nil {
-		return fmt.Errorf("error changing expiration of session <%s>:\n%s", sid, changeExpiration.Error())
+		return sessionState, fmt.Errorf("error changing expiration of session <%s>:\n%s", sid, changeExpiration.Error())
 	}
 	_, err:= list.Exec()
 	if err != nil {
-		return fmt.Errorf("error getting sid <%s>:\n%v", string(sid), err.Error())
+		return sessionState, fmt.Errorf("error getting sid <%s>:\n%v", string(sid), err.Error())
 	}
-	err = json.Unmarshal([]byte(result.Val()), sessionState)
+	err = json.Unmarshal([]byte(result.Val()), &sessionState)
+	
+	// fmt.Printf("user is: %+v\n", sessionState)
 	if err != nil {
-		return fmt.Errorf("error unmarshaling sessionState: %s", err.Error())
+		return sessionState, fmt.Errorf("error unmarshaling sessionState: %s", err.Error())
 	}
-	return nil
+	return sessionState, nil
 
 }
 
