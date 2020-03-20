@@ -5,6 +5,7 @@ import(
 	"errors"
 	"fmt"
 	"movie-list/server/gateway/handlers"
+	"log"
 )
 
 type instance struct{
@@ -19,7 +20,7 @@ func CreateInstance(conn *sql.DB) handlers.DatabaseStore {
 }
 
 func (obj *instance) InsertMovie(umi *handlers.UserMovieInfo) (*handlers.UserMovieInfo, error) {
-	q := "insert into Movie (UserID, MovieURL, MovieTitle, MovieOverview) values (?,?,?,?)"
+	q := "insert into Movie (UserID,  MovieURL, MovieTitle, MovieOverview) values (?,?,?,?)"
 	result, err := obj.CONN.Exec(q, umi.UserID, umi.URL, umi.Title, umi.Overview)
 	if (err != nil){
 		return nil, err
@@ -27,6 +28,35 @@ func (obj *instance) InsertMovie(umi *handlers.UserMovieInfo) (*handlers.UserMov
 	id, _ := result.LastInsertId()
 	m , err := obj.LocateMovieByID(id)
 	return m, err
+}
+
+func (obj *instance) GetAllMovies(id int64) ([]handlers.UserMovieInfo, error) {
+	var list []handlers.UserMovieInfo
+	m := handlers.UserMovieInfo{}
+
+	q := "select ID, UserID, MovieURL, MovieTitle, MovieOverview from Movie where UserID = ?"
+	rows, err := obj.CONN.Query(q, id)
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		if err := rows.Scan(&m.MovieID, &m.UserID,  &m.URL, &m.Title, &m.Overview ); err != nil {
+			if err == sql.ErrNoRows {
+				return nil, fmt.Errorf("%s", "Movie not found")
+			}
+			return nil, fmt.Errorf("error scanning row: %v", err)
+		}
+		fmt.Printf(" movie item scanned is : %+v\n", m)
+		list = append(list, m)
+		
+	}
+
+	for i, val := range list {
+		fmt.Printf("%d\n movie item in db is: %+v\n", i, val)
+	}
+	return list, err
 }
 
 
@@ -83,7 +113,7 @@ func (obj *instance) LocateMovieByID(id int64) (*handlers.UserMovieInfo, error) 
 		return nil, errors.New("invalid primary key")
 	}
 	rows := obj.CONN.QueryRow("SELECT * FROM Movie WHERE id=?", id)
-	if err := rows.Scan(&movie.MovieID, &movie.UserID, &movie.URL, &movie.Title, &movie.Overview ); err != nil {
+	if err := rows.Scan(&movie.MovieID, &movie.UserID,  &movie.URL, &movie.Title, &movie.Overview ); err != nil {
 		if err == sql.ErrNoRows {
 			return nil, fmt.Errorf("%s", "Movie not found")
 		}

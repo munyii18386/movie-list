@@ -52,6 +52,7 @@ type DatabaseStore interface{
 	Delete(id int64) error
 	InsertMovie(umi *UserMovieInfo) (*UserMovieInfo, error)
 	LocateMovieByID(id int64) (*UserMovieInfo, error)
+	GetAllMovies(id int64) ([]UserMovieInfo, error)
 }
 
 // SessionState stores session time and authenticated user
@@ -60,6 +61,7 @@ type SessionState struct {
 	User        *User `json:"user"`
 }
 
+// MovieDetail struct used for 
 type MovieDetail struct{
 	ID  string  `json:"id"`
 	URL string `json:"url"`
@@ -67,20 +69,23 @@ type MovieDetail struct{
 	Overview string `json:"overview"`
 }
 
+// UserMovieInfo struct used for 
 type UserMovieInfo struct{
-	MovieID  int64  `json:"id"`
-	UserID int64  `json:"id"`
+	MovieID  int64  `json:"movie_id"`
+	UserID int64  `json:"user_id"`
 	URL string `json:"url"`
 	Title string `json:"title"`
 	Overview string `json:"overview"`
 }
 
+// Info struct used for 
 type Info struct{
-	MovieID  string `json:"movieid"`
-	UserID string `json:"userid"`
+	MovieID  string `json:"movie_id"`
+	UserID string `json:"user_id"`
 	MovieURL string `json:"movie_url"`
 	Title string `json:"title"`
 	Overview string `json:"overview"`
+	MovieAdded bool `json:"movie_added"`
 }
 
 //RedisStore represents a session data store.

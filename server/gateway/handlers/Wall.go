@@ -11,7 +11,7 @@ import(
 )
 
 
-// LoginHandler is used to
+// WallHandler is used to
 func (ctx *Context) WallHandler (w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Wall route reached!")
 	if r.Method == http.MethodPost {
@@ -54,7 +54,8 @@ func (ctx *Context) WallHandler (w http.ResponseWriter, r *http.Request) {
 		err = json.Unmarshal(body, &m)
 		ExitTransaction(err)
 		// fmt.Printf("movie detail is: %+v\n", m)
-		
+
+		HandleError(err)
 		userMovieInfo := &UserMovieInfo{
 			UserID: ss.User.ID,
 			URL: m.URL,
@@ -72,6 +73,7 @@ func (ctx *Context) WallHandler (w http.ResponseWriter, r *http.Request) {
 			MovieURL: updatedResult.URL,
 			Title: updatedResult.Title,
 			Overview: updatedResult.Overview,
+			MovieAdded: true,
 		}
 
 		w.Header().Add("Content-Type", "application/json")

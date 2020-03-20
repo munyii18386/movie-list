@@ -12,7 +12,9 @@ export const  Search = () => {
     const initialState = {
         keyphrase: "",
         results: [],
-        index: 0
+        cardID: -1,
+        index: -1,
+        text: "Add to Wall",
     };
     const [data, setData] = React.useState(initialState);
 
@@ -31,7 +33,7 @@ export const  Search = () => {
         axios.get(url)
         .then((response)=>{
             // console.log(response)
-            console.log(response.data.results)
+            // console.log(response.data.results)
             setData({
                 ...data,
                 results: response.data.results
@@ -48,7 +50,10 @@ export const  Search = () => {
         event.preventDefault()
         console.log(event.target.id)
         const item = data.results[event.target.id]
-        console.log(item)
+        console.log(event.target.textContent)
+        data.cardID = event.target.id
+        
+        // console.log(item)
         let url = ""
          if(item.poster_path ==  null){
             url = require('../img/reel.jpg')
@@ -62,7 +67,7 @@ export const  Search = () => {
             overview: item.overview
         }
 
-        // console.log(movie)
+
 
         let config = {
             headers: {
@@ -74,22 +79,50 @@ export const  Search = () => {
         .then((response)=>{
             console.log(response)
             console.log(response.data)
+            console.log(data)
+            if(response.data.movie_added){
+                let  btn = document.getElementById(data.cardID);
+                btn.textContent = "Added"
+            }
+          
+            
+
         }) 
         .catch((e) =>{
             console.log(e)
+            alert("Unable to add movie")
         }) 
+
+       
     }
+
+    // if (data.cardList.length > 0){
+    //     data.cardList.map(item => {
+    //         // 
+    //         console.log(item)
+    //         console.log(typeof data.cardID.toString())
+    //         console.log(item.localeCompare(data.cardID.toString()))
+    //         if(item.localeCompare(data.cardID)){
+    //                setData({
+    //                    text: "Added"
+    //                })
+    //         }
+    //     })
+    // }
 
         const list = data.results.map((item, index) => {
             if(data.results && data.results.length){
-               data.index = index;
+                data.index = index
+
+                
                 let url = ""
                 if(item.poster_path ==  null){
                     url = require('../img/reel.jpg')
                 } else{
-                    url = 'https://image.tmdb.org/t/p/w500/'+item.poster_path
+                    url = 'https://image.tmdb.org/t/p/w500'+item.poster_path
                 }
-                console.log("find the title by id: " + data.results[index].title)
+                // console.log("find the title by id: " + data.results[index].title)
+
                 return(
                     <div className="search-margin">
                         <Col md={4} >
@@ -100,15 +133,20 @@ export const  Search = () => {
                                     <Card.Text>
                                     {item.overview}
                                     </Card.Text>
-                                    <Button id={data.index} onClick={handleAdd} variant="primary">Add to Wall</Button>
+                                    <Button  id={data.index} onClick={handleAdd} variant="primary">{data.text}</Button>
                                 </Card.Body>
                             </Card>
                         </Col>
                     </div> 
                     
                 )
+
             }
         })
+
+        console.log(data)
+
+   
 
         return(
             <Container className="search-container">
@@ -118,7 +156,7 @@ export const  Search = () => {
                         <Nav.Link href="/search">Search</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                        <Nav.Link href="/moviewall">My Wall</Nav.Link>
+                        <Nav.Link  href="/moviewall">Movie Wall</Nav.Link>
                     </Nav.Item>
                
                 </Nav>

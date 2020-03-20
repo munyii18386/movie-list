@@ -40,7 +40,7 @@ func (rs *RedisInstance) Save(sid string, sessionState interface{}) error {
 
 //Get populates `sessionState` with the data previously saved
 //for the given SessionID
-func (rs *RedisInstance) Get(sid string, sessionState interface{}) (interface{} , error) {
+func (rs *RedisInstance) Get(sid string, sessionState interface{}) (interface{}, error) {
 	key := "sid:" + sid
 	list := rs.Client.Pipeline()
 	result := list.Get(key)
